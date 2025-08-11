@@ -1,6 +1,5 @@
-# Trip Dinner Planner
-Hosted at [https://tripdinnerplanner.food](https://tripdinnerplanner.food/) and ready for use!
----
+# Park Search
+Hosted at [[https://tripdinnerplanner.food](https://raft-engineering-challenge-808421331184.us-west1.run.app/)]([https://tripdinnerplanner.food/](https://raft-engineering-challenge-808421331184.us-west1.run.app/)) and ready for use!
 
 ## Table of Contents
 
@@ -14,38 +13,19 @@ Hosted at [https://tripdinnerplanner.food](https://tripdinnerplanner.food/) and 
 
 ---
 
-## Personal Notes
-
-This was a lot of fun to build. It is a guilty pleasure of mine to have an excuse to put my head down and code-non stop for hours and hours. I heavily used AI to build this app: Gemini, ChatGPT, and Github-copilot. AI is so empowering in 2025! I'll share my conversations I had with ChatGPT [here](https://chatgpt.com/share/689355de-3acc-8002-a23b-db8677f3b55c) and Gemini [here](https://g.co/gemini/share/595f5a6c338c) if it is of interest to anyone. 
-
-I bought a domain on namecheap for $5. I provisioned a SQL database for $0.01/hour in google cloud platform, and deployed the app to Google Cloud Run (which runs even cheaper than the SQL db).
-
-I thought up my own idea for an app and didn't use the prompt options. I covered all the requirements and bonuses from the [challenge](https://gist.github.com/omnipresent07/a8fe14bc158e06a1951bc67e936450fd) I used React, Material UI, Express, PostgreSQL, Websockets, and docker compose for infra setup. I interface an LLM in two ways: streamed output for the user to see, and use it to synthesize unstructured data, and produce pins on a dynamic map UI component. I hosted the app and made some feature walkthrough videos. With that being said if theres something missing you folks wanted to see please don't hesitate to let me know.
-
 ## Introduction
 
-The **Trip Dinner Planner** is a web application designed to simplify the process of planning dinners for vacations/work trips. Users specify the city they're traveling to, their approximate budget, the number of days they'll stay, and their basic food preferences. An LLM (OpenAI GPT4) takes this information then makes a list of recommendations which are visulalized on a map. The LLM also gives an additional recommendation for fun things to do in the nearby area, allowing users to quickly iterate on the many possibilities for how their trip evenings can play out.
+Park Search is an application that helps users find the best parks in Hawaii, based on the [park amenities](https://honolulu-cchnl.opendata.arcgis.com/datasets/cchnl::park-amenities/about) public dataset. Ask an LLM to interpret this data and your request and display the best parks on a map.
 
 ---
 
 ## Demo Videos
 
-Check out these short videos to see the Trip Dinner Planner in action!
+This video shows a user querying for "the closest 3 parks to 'Pearl City District Park', that have the Basketball amenity". The user then refines the result by querying "add the closest park to 'Kapolei' (city on Oahu) that has Baseball". After the second query is made an additional park icon pops up which has the baseball amenity.
 
-### *Creating a Trip*
-This involves filling out and submitting a form that captures your trip information, then viewing the resulting resturaunts in a table and on a map, which zooms into the city you're traveling to and has several pins indicating the location of the recommended resturaunts.
+*NOTE: Through testing, GPT 5 was the best performing model, but is slow. Queries take on average 30s to 1m, so please be patient.*
 
-https://github.com/user-attachments/assets/486a5613-0ed4-4636-8f4f-c7a975db43ca
-
-### *Event Recommendation*
-When the trip is created, the LLM is automatically prompted to give recommendations for "fun things to do in the nearby area". This output is streamed to users in a chat box next to the map.
-
-https://github.com/user-attachments/assets/44699235-ab62-4d66-96b8-e470902647ca
-
-### *Multiple Users*
-The first name field of the user model is unique and is the only thing required to authenticate a user during a login. Each user can have one trip saved to their account. Upon login, their trip data is restored to the UI, displaying their recommended restaurants and map pins. In this video I go back and forth from Maxwell's account (Waikiki) and Chris's account (Tokyo).
-
-https://github.com/user-attachments/assets/294acfa1-03bd-43ef-b391-77c24bb566a4
+https://github.com/user-attachments/assets/2847c6cf-e3d2-43cf-97fa-d8e94696ad62
 
 ## Local Setup
 
