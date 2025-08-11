@@ -80,6 +80,7 @@ The docker-compose.yml file specifies all the containers required to run the app
 5. **View app in browser**
 
 At this point the app should be visible in your browser at [http://localhost:8080](http://localhost:8080)
+
 ---
 
 ## Design Notes
