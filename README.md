@@ -1,15 +1,14 @@
 # Park Search
-Hosted at [[https://tripdinnerplanner.food](https://raft-engineering-challenge-808421331184.us-west1.run.app/)]([https://tripdinnerplanner.food/](https://raft-engineering-challenge-808421331184.us-west1.run.app/)) and ready for use!
+Hosted at [https://raft-engineering-challenge-808421331184.us-west1.run.app/](https://raft-engineering-challenge-808421331184.us-west1.run.app/)) and ready for use!
 
 ## Table of Contents
 
-1.  [Personal Notes](#personal-notes)
-2.  [Introduction](#introduction)
-3.  [Demo Videos](#demo-videos)
-4.  [Local Setup](#local-setup)
+1.  [Introduction](#introduction)
+2.  [Demo Videos](#demo-videos)
+3.  [Local Setup](#local-setup)
     * [Prerequisites](#prerequisites)
     * [Getting Started](#getting-started)
-5.  [Design Notes](#design-notes)
+4.  [Design Notes](#design-notes)
 
 ---
 
