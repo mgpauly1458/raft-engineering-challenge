@@ -20,11 +20,17 @@ Park Search is an application that helps users find the best parks in Hawaii, ba
 Go to the app and view the parks in the map. Type into the search bar what combinations of features, locations, or names of the parks you want to see. Your chat history will be persistently saved and displayed next to the map (and is sent to the LLM after each query, so feel free to reference your previous chats).
 
 Example Queries from the demo video:
+
 "Remove all the parks that have Basketball"
+
 "Show the closest 3 parks to 'Pearl City District Park'"
+
 "Add the closest park to Kapolei that has Baseball"
 
 *Note* The LLM looks for the words 'Remove' and 'Add' in your queries, due to how the prompt was engineered. This is not necessary to successfully use the app, but testing showed this trick does improve performance.
+
+*Note* Due to the persistent storage and global app state through SQL, only one person should use the deployed app at a time.
+
 ---
 
 ## Demo Videos
@@ -107,7 +113,7 @@ The backend has three main services:
 3. PostgreSQL Database
 
 ### LLM Chat Context Processing / Persistent Storage
-This app works a lot like ChatGPT, where the user has a chat box with the LLM and can interact back and forth with persistent storage of conversations.
+This app works a lot like ChatGPT, where the user has a chat box with the LLM and can interact back and forth with persistent storage of conversations. The 'Reset' button clears the frontend and backend and resets everything.
 
 #### Deployment / CI/CD
 This is perhaps the most satisfying part of the application. Google Cloud run has direct access to your github repo through the github API (authenticated through OAuth on GCP). A trigger and build process is automatically created when you create a Cloud Run service, which is designed to pull the repo, build, and deploy the application with extremely minimal configuration. All I did was create the service, loginto Github on Google Cloud Run, show it what repo I'm using for this project, show it where the Dockerfile is, and it handles the rest. This build process is automatically triggered anytime 'main' is pushed to on the repo, streamlining CI/CD.
