@@ -89,7 +89,9 @@ router.post('/ai', async (req, res) => {
     and the current park IDs ${JSON.stringify(currentParkIds)},
     please return a JSON array of park IDs that match the user criteria: "${userCriteria}"
     Do not return anything else, just the JSON array of park IDs.
-    Some requests will be subtractive or additive to the current park IDs, so you may return an empty array if no parks match the criteria.
+    Some requests will be subtractive or additive to the current park IDs, meaning you will need to remove parks from the current selection
+    or add parks to the current selection based on the user criteria (sometimes adding and removing parks in the same query).
+    If no parks match the criteria, return an empty array.
     `;
     const client = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY, // Ensure you have your OpenAI API key set in your environment variables

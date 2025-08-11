@@ -31,6 +31,7 @@ services:
     environment:
       - WS_PORT=8081 # change this to 8081 to match the frontend
       - OPENAI_API_KEY=
+      - APP_ENV=prod
     depends_on:
       db:
         condition: service_healthy
