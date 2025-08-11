@@ -1,5 +1,5 @@
 # Park Search
-Hosted at [https://raft-engineering-challenge-808421331184.us-west1.run.app/](https://raft-engineering-challenge-808421331184.us-west1.run.app/)) and ready for use!
+Hosted at [https://raft-engineering-challenge-808421331184.us-west1.run.app/](https://raft-engineering-challenge-808421331184.us-west1.run.app/)
 
 ## Table of Contents
 
@@ -16,6 +16,15 @@ Hosted at [https://raft-engineering-challenge-808421331184.us-west1.run.app/](ht
 
 Park Search is an application that helps users find the best parks in Hawaii, based on the [park amenities](https://honolulu-cchnl.opendata.arcgis.com/datasets/cchnl::park-amenities/about) public dataset. Ask an LLM to interpret this data and your request and display the best parks on a map.
 
+### Usage
+Go to the app and view the parks in the map. Type into the search bar what combinations of features, locations, or names of the parks you want to see. Your chat history will be persistently saved and displayed next to the map (and is sent to the LLM after each query, so feel free to reference your previous chats).
+
+Example Queries from the demo video:
+"Remove all the parks that have Basketball"
+"Show the closest 3 parks to 'Pearl City District Park'"
+"Add the closest park to Kapolei that has Baseball"
+
+*Note* The LLM looks for the words 'Remove' and 'Add' in your queries, due to how the prompt was engineered. This is not necessary to successfully use the app, but testing showed this trick does improve performance.
 ---
 
 ## Demo Videos
@@ -83,31 +92,22 @@ At this point the app should be visible in your browser at [http://localhost:808
 - Deployment & CI/CD
   - Docker
   - Google Cloud Platform (Cloud Run)
-  - Namecheap (domain registrar)
 - Debugging / Testing
   - Postman (backend)
   - Chrome developer tools (frontend)
   - Google Cloud Run logs (deployment)
 
-### Architecture
+### Data Processing
+The data was downloaded from the [park amenities](https://honolulu-cchnl.opendata.arcgis.com/datasets/cchnl::park-amenities/about) dataset. It was cleaned, and reformatted to json using Python. The data was then added to a SQL table when the app is initialized. This data set is small enough where this was a feasible option. The SQL dataset is the main source of truth for this app.
 
-#### Frontend
-The frontend was build with Create React App (CRA), and Material UI for styling and components. The react components follow this basic structure:
-- Index.js
-- App.js
-- DinnerPlanner.js (which is the main page)
-On the main page there is a side bar and a map which are placed next to eachother. The map just contains the Laflet map UI. The side bar contains the rest of the functionality in the app.
-
-The frontend bundle is compiled and placed in the backend/public directory, which is served by express.
-
-#### Backend
+### Backend
 The backend has three main services:
 1. Web Server
-Necessary for serving the frontend, and handling all backend API calls and handling database initialization and CRUD. This server is also responsible for making the OpenAI API calls when the trip is being created.
-2. Web Socket Server
-The only job of the web socket server is to stream the "recommended event" chat from GPT4 after a trip is created. This had to be its own container and service in the cloud because GCP follows a strict one port per service rule. The web server needed its port to handle web traffic, so the web socket needed to be its own service and container.
+2. Web Socket Server (for streaming LLM chat completions)
 3. PostgreSQL Database
-This was instantiated on GCP and connected to the app through environment variable credentials passed to the Sequelize ORM in the express server.
+
+### LLM Chat Context Processing / Persistent Storage
+This app works a lot like ChatGPT, where the user has a chat box with the LLM and can interact back and forth with persistent storage of conversations.
 
 #### Deployment / CI/CD
 This is perhaps the most satisfying part of the application. Google Cloud run has direct access to your github repo through the github API (authenticated through OAuth on GCP). A trigger and build process is automatically created when you create a Cloud Run service, which is designed to pull the repo, build, and deploy the application with extremely minimal configuration. All I did was create the service, loginto Github on Google Cloud Run, show it what repo I'm using for this project, show it where the Dockerfile is, and it handles the rest. This build process is automatically triggered anytime 'main' is pushed to on the repo, streamlining CI/CD.
