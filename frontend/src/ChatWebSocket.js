@@ -5,9 +5,9 @@ const ChatWebSocket = ({ newUserQuery, serializedParks, chatContext, setChatCont
   const [isLoading, setIsLoading] = useState(false); // State to show loading indicator
   const chatContextRef = useRef(chatContext); // Ref to hold the current chat context
   // prod url
-  // const webSocketUrl = `wss://raft-project-web-socket-808421331184.us-west1.run.app`; // WebSocket server URL
+  const webSocketUrl = `https://raft-engineering-challenge-websocket-808421331184.europe-west1.run.app`; // WebSocket server URL
   // dev url
-  const webSocketUrl = `ws://localhost:8081`; // WebSocket server URL
+  // const webSocketUrl = `ws://localhost:8081`; // WebSocket server URL
   
   const fetchChatContext = async () => {
     setIsLoading(true);

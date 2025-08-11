@@ -1,7 +1,6 @@
 .env
 node_modules
 venv
-docker-compose.yml
 
 @Todo: remove after api key removed
 processData.py
