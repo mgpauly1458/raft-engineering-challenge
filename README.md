@@ -55,20 +55,14 @@ You'll need:
 ### Getting Started
 1.  **Clone the Repository:**
 
-2.  **Copy the docker-compose.yml in the backend dir**
-Place the docker-compose.yml file in the root of the cloned repo. Then move it to the backend/docker-compose.yml directory.
-    ```bash
-    mv docker-compose.yml backend/docker-compose.yml
-    ```
-
-3.  **Add your OpenAI API key to docker-compose.yml file**
+2.  **Add your OpenAI API key to backend/docker-compose.yml file**
 There are two locatoins you must add the key:
 - services.backend.environment
 - services.web_socket.environment
 
 You will see 'OPENAI_API_KEY=', add the key right after the '='.
 
-4. **Build and run the containers**
+3. **Build and run the containers**
 The docker-compose.yml file specifies all the containers required to run the app:
 - backend (express server)
 - db (postgres)
@@ -77,7 +71,7 @@ The docker-compose.yml file specifies all the containers required to run the app
     cd ./backend
     sudo docker compose up --build
     ```
-5. **View app in browser**
+4. **View app in browser**
 
 At this point the app should be visible in your browser at [http://localhost:8080](http://localhost:8080)
 
